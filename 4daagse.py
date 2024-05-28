@@ -28,14 +28,15 @@ try:
             print("Tickets are available!")
             ticket_kopen_element.click()
             winsound.Beep(440, 2000)  # Alert the user
-            # Break out of the loop after successfully clicking the button
-            # The script ends here, but the browser remains open for manual inspection or further actions
-            break
+            break  # Break out of the loop after successfully clicking the button
         except TimeoutException:
             print("Tickets are not available at the moment. Checking again...")
-            driver.refresh()  # Consider the frequency of refresh to avoid being blocked by the website
+            driver.refresh()
             wait.until(EC.presence_of_element_located((By.XPATH, "//body")))  # Wait for the page to load again
 
 except KeyboardInterrupt:
     print("Script stopped by user.")
-# Removed the finally block to prevent closing the WebDriver automatically
+
+# Add a line to prevent the script from closing automatically
+input("Press any key to exit...")  # Waits for user input before closing the browser
+driver.quit()  # Make sure to quit the driver after completion to free resources
